@@ -38,6 +38,7 @@ class SourcePreprocessor: BasePreprocessor {
 
   func prepareFor(view: UIView, targetView: UIView) {
     let targetPos = context.container.convert(targetView.layer.position, from: targetView.superview!)
+    let globalTargetPos = targetView.convert(targetView.layer.position, to: nil)
 
     var state = context[view]!
 
@@ -45,6 +46,7 @@ class SourcePreprocessor: BasePreprocessor {
     state.coordinateSpace = .global
 
     // remove incompatible options
+    state.globalPosition = globalTargetPos
     state.position = targetPos
     state.transform = nil
     state.size = nil
